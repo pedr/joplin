@@ -2,10 +2,9 @@
 
 import { execCommand, getRootDir } from '@joplin/utils';
 import { readFile, readdir, stat, writeFile } from 'fs/promises';
-import * as MarkdownIt from 'markdown-it';
+import MarkdownIt = require('markdown-it');
 import { htmlentities, isSelfClosingTag } from '@joplin/utils/html';
 import { compileWithFrontMatter, stripOffFrontMatter } from './utils/frontMatter';
-import StateCore = require('markdown-it/lib/rules_core/state_core');
 import { copy, mkdirp, remove, pathExists } from 'fs-extra';
 import { basename, dirname } from 'path';
 import markdownUtils, { MarkdownTable } from '@joplin/lib/markdownUtils';
@@ -333,7 +332,7 @@ export const processMarkdownDoc = (sourceContent: string, context: Context): str
 
 	let items: string[] = [];
 
-	markdownIt.core.ruler.push('converter', (state: StateCore) => {
+	markdownIt.core.ruler.push('converter', (state: MarkdownIt.StateCore) => {
 		const tokens = state.tokens;
 		// console.info(JSON.stringify(tokens, null, '\t'));
 		for (let i = 0; i < tokens.length; i++) {

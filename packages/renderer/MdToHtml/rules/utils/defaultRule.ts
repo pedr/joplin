@@ -1,7 +1,6 @@
-import type * as MarkdownIt from 'markdown-it';
-import type * as Renderer from 'markdown-it/lib/renderer';
+import MarkdownIt = require('markdown-it');
 
-const defaultRule = (markdownIt: MarkdownIt, key: keyof Renderer.RenderRuleRecord): Renderer.RenderRule => {
+const defaultRule = (markdownIt: MarkdownIt, key: keyof MarkdownIt.Renderer.RenderRuleRecord): MarkdownIt.Renderer.RenderRule => {
 	if (markdownIt.renderer.rules[key]) return markdownIt.renderer.rules[key];
 	return (tokens, idx, options, _env, renderer) => renderer.renderToken(tokens, idx, options);
 };
